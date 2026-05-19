@@ -100,3 +100,5 @@ The included tests do not require a running MySQL server. Full manual testing of
 - [Project Report](docs/PROJECT_REPORT.md)
 - [ER Diagram](docs/ER_DIAGRAM.md)
 - [Normalization](docs/NORMALIZATION.md)
+- [Project Understanding and Pitch Guide](docs/PITCH_GUIDE.md)
+- [Project Viva and Q&A](docs/VIVA_QA.md)
