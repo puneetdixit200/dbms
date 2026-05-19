@@ -226,6 +226,8 @@ def get_monthly_report(db: Database, user_id: int, year: int, month: int) -> dic
             expense_categories = cursor.fetchall()
         if cursor.nextset():
             income_categories = cursor.fetchall()
+        while cursor.nextset():
+            cursor.fetchall()
 
     if summary:
         monthly = summary[0]
@@ -243,4 +245,3 @@ def get_monthly_report(db: Database, user_id: int, year: int, month: int) -> dic
         "expense_categories": expense_categories,
         "income_categories": income_categories,
     }
-

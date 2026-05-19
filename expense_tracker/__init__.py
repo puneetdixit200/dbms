@@ -3,7 +3,7 @@ from __future__ import annotations
 from flask import Flask
 from dotenv import load_dotenv
 
-from .config import Config
+from .config import get_config
 from .db import Database
 from .routes import bp
 
@@ -12,7 +12,7 @@ def create_app(test_config: dict | None = None) -> Flask:
     load_dotenv()
 
     app = Flask(__name__, template_folder="../templates", static_folder="../static")
-    app.config.from_object(Config)
+    app.config.from_mapping(get_config())
 
     if test_config:
         app.config.update(test_config)
@@ -21,4 +21,3 @@ def create_app(test_config: dict | None = None) -> Flask:
     app.register_blueprint(bp)
 
     return app
-
