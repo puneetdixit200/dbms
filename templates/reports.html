@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}Reports | Personal Expense Tracker{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Monthly report</p>
+        <h1>Balance Calculation</h1>
+    </div>
+    <form class="period-form" method="get" action="{{ url_for('main.reports') }}">
+        <label>
+            Year
+            <input type="number" name="year" min="2000" max="2100" value="{{ selected_year }}">
+        </label>
+        <label>
+            Month
+            <input type="number" name="month" min="1" max="12" value="{{ selected_month }}">
+        </label>
+        <button class="btn btn-secondary" type="submit">Run Report</button>
+    </form>
+</section>
+
+<section class="summary-grid">
+    <article class="metric metric-income">
+        <span>Income</span>
+        <strong>Rs. {{ "%.2f"|format(report.monthly.total_income) }}</strong>
+    </article>
+    <article class="metric metric-expense">
+        <span>Expenses</span>
+        <strong>Rs. {{ "%.2f"|format(report.monthly.total_expense) }}</strong>
+    </article>
+    <article class="metric metric-balance">
+        <span>Balance</span>
+        <strong>Rs. {{ "%.2f"|format(report.monthly.balance) }}</strong>
+    </article>
+</section>
+
+<section class="two-column">
+    <div class="panel">
+        <h2>Expenses by Category</h2>
+        {% if report.expense_categories %}
+            <ul class="report-list">
+                {% for item in report.expense_categories %}
+                    <li>
+                        <span>{{ item.category_name }}</span>
+                        <strong>Rs. {{ "%.2f"|format(item.total_amount) }}</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No category expense data for this month.</p>
+        {% endif %}
+    </div>
+
+    <div class="panel">
+        <h2>Income by Category</h2>
+        {% if report.income_categories %}
+            <ul class="report-list">
+                {% for item in report.income_categories %}
+                    <li>
+                        <span>{{ item.category_name }}</span>
+                        <strong>Rs. {{ "%.2f"|format(item.total_amount) }}</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No category income data for this month.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+

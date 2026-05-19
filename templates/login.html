@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Login | Personal Expense Tracker{% endblock %}
+
+{% block content %}
+<section class="auth-shell">
+    <div class="auth-panel">
+        <h1>Login</h1>
+        <form method="post" class="stacked-form">
+            <label>
+                Username or email
+                <input type="text" name="login" autocomplete="username" required>
+            </label>
+            <label>
+                Password
+                <input type="password" name="password" autocomplete="current-password" required>
+            </label>
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+        <p class="muted">New user? <a href="{{ url_for('main.register') }}">Create an account</a>.</p>
+    </div>
+</section>
+{% endblock %}
+
